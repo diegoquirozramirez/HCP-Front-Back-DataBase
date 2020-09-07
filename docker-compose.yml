@@ -1,0 +1,33 @@
+version: '3'
+services:   
+    db_mongo:
+        container_name: database_mongo
+        image: mongo
+        restart: always
+        env_file: 
+            - prod.env
+        networks: 
+            - net
+        volumes: 
+            - ${PWD}/mongo/data:/data/db
+
+    back:
+        container_name: back_node
+        build: 
+            context: "/home/diego/Documentos/HCP-Prueba/back"
+        restart: always
+        networks: 
+            - net
+        ports: 
+            - 5000:5000
+        depends_on: 
+            - db_mongo
+        volumes: 
+            - /home/diego/Documentos/HCP-Prueba/back/swagger/:/usr/src/ms-hcp-js/swagger
+    
+volumes: 
+    db_mongo:
+    back:
+
+networks: 
+    net:

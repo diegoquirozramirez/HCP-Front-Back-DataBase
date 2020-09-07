@@ -1,0 +1,205 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "Documentación de prueba en Swagger para docuemntar servicos REST",
+      "version": "1.0.0",
+      "title": "Swagger for Microservices Example",
+      "contact": {
+        "email": "diego.quiroz@acceso.com.pe"
+      }
+    },
+    "host": "localhost:5000",
+    "basePath": "/user",
+    "tags": [
+      {
+        "name": "user",
+        "description": "Operacion CRUD de usuarios",
+        "externalDocs": {
+          "description": "Puede ser golpeado directament desde insomnia"
+        }
+      }
+    ],
+    "schemes": [
+      "http"
+    ],
+    "paths": {
+      "/alluser": {
+        "get": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Obtener todos los usuarios",
+          "description": "Se puede traer datos de todos los registros",
+          "operationId": "createUser",
+          "produces": [           
+            "application/json"
+          ],          
+          "responses": {
+            "00": {
+              "description": "Se ejecuto correctamente"
+            },
+            "01": {
+              "description": "Ocurrio algo inesperado"
+            },
+            "99": {
+              "description": "Se cayo el sistema"
+            }            
+          }
+        }
+      },
+      "/getoneuser": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Obtener un registro de un usuario",
+          "description": "El ID del usuario",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "_id",
+              "in": "body",            
+              "require": true,
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          ],
+          "responses": {
+            "00": {
+              "description": "Se ejecuto correctamente"
+            }
+          }
+        }        
+      },
+      "/updateoneuser": {
+        "put": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Actualizar un usuario",
+          "description": "Para actualizar los usuarios",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "body",
+              "in": "body",
+              "description": "Cuerpo que se envia para actualizar",
+              "require": true,
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "00": {
+              "description": "Se ejecuto correctamente"
+            },
+            "01": {
+              "description": "Sucedio algo inesperado"
+            },
+            "99": {
+              "description": "Se ejecuto incorrectamente"
+            }
+          }
+        }
+      },
+      "/deleteoneuser/{_id}": {
+        "delete": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Eliminar usuario",
+          "description": "Para eliminar los usuarios",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "_id",
+              "in": "path",
+              "description": "Cuerpo que se envia para actualizar",
+              "require": true,
+              "type": "string"
+              }            
+          ],
+          "responses": {
+            "00": {
+              "description": "Se ejecuto correctamente"
+            },
+            "01": {
+              "description": "Sucedio algo inesperado"
+            },
+            "99": {
+              "description": "Se ejecuto incorrectamente"
+            }
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "petstore_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
+        "flow": "implicit",
+        "scopes": {
+          "write:pets": "modify pets in your account",
+          "read:pets": "read your pets"
+        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    },
+    "definitions": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "contact_type": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "User"
+        }
+      }, 
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "codRes": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    }
+  }
